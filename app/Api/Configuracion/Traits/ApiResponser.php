@@ -10,6 +10,10 @@ use Illuminate\Support\Collection;
 trait ApiResponser{
     //RESPUESTA SATISFACTORIA
     private function successResponse($data, $code){
+        // en caso de que la consulta sea exitosa pero no contenga informacion
+        if (count($data[0]) === 0){
+            return response()->json(['datos' => [], 'status' => $code]);
+        }
         //SE VALIDAN LAS RUTAS QUE NO DEBEN DEVOLVER UN TOKEN
         if (request()->route()->uri == "apiglobal/auth/v1/login" || request()->route()->uri == "apiglobal/auth/v1/logout"){
             return response()->json(['datos' => $data[0], 'status' => $code]);

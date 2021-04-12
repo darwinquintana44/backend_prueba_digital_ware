@@ -8,12 +8,29 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-//RUTAS DE PRODUCTOS
-Route::middleware(['auth:api'])->prefix('productos')->group(function ($router){
-    Route::get('/', 'ProductosController@index');
-    Route::get('listado', 'ProductosController@listadoGeneral');
-    Route::get('listado/{id}', 'ProductosController@listadoPorId');
-    Route::post('/', 'ProductosController@create');
-    Route::patch('/', 'ProductosController@update');
-    Route::delete('/{id}', 'ProductosController@destroy');
+//RUTAS DE PASAJEROS
+Route::middleware(['auth:api'])->prefix('pasajeros')->group(function ($router){
+    Route::get('listado', 'PasajerosController@listadoGeneral');
+    Route::get('listado/{id}', 'PasajerosController@listadoPorId');
+    Route::post('/', 'PasajerosController@create');
+    Route::patch('/', 'PasajerosController@update');
+    Route::delete('/{id}', 'PasajerosController@destroy');
+});
+
+//RUTAS DE PILOTOS
+Route::middleware(['auth:api'])->prefix('pilotos')->group(function ($router){
+    Route::get('listado', 'PilotosController@listadoGeneral');
+    Route::get('listado/{id}', 'PilotosController@listadoPorId');
+    Route::post('/', 'PilotosController@create');
+    Route::patch('/', 'PilotosController@update');
+    Route::delete('/{id}', 'PilotosController@destroy');
+});
+
+//RUTAS DE AERONAVES
+Route::middleware(['auth:api'])->prefix('aeronaves')->group(function ($router){
+    Route::get('listado', 'AeronavesController@listadoGeneral');
+    Route::get('listado/{id}', 'AeronavesController@listadoPorId');
+    Route::post('/', 'AeronavesController@create');
+    Route::patch('/', 'AeronavesController@update');
+    Route::delete('/{id}', 'AeronavesController@destroy');
 });

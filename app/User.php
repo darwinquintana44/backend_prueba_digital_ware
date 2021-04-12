@@ -23,7 +23,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'identification', 'movil', 'telephone', 'direction', 'email', 'password', 'password_confirmation', 'id_tipo_identificacion', 'id_usuario'
+        'name', 'last_name', 'identification', 'movil', 'telephone', 'direction', 'email', 'rol', 'password', 'password_confirmation', 'id_tipo_identificacion', 'id_usuario'
     ];
 
     /**
@@ -65,13 +65,14 @@ class User extends Authenticatable implements JWTSubject
         $data1 = self::where('id', '=', $data['id'])
             ->update([
                 'id_tipo_identificacion' => $data['id_tipo_identificacion'],
-                'name' => strtoupper($data['name']),
-                'last_name' => strtoupper($data['last_name']),
+                'name' => mb_strtoupper($data['name']),
+                'last_name' => mb_strtoupper($data['last_name']),
                 'identification' => $data['identification'],
                 'movil' => $data['movil'],
                 'telephone' => $data['telephone'],
-                'direction' => strtoupper($data['direction']),
-                'email' => strtoupper($data['email']),
+                'direction' => mb_strtoupper($data['direction']),
+                'email' => mb_strtoupper($data['email']),
+                'rol' => mb_strtolower($data['rol']),
                 'password' => Hash::make($data['password']),
                 'password_confirmation' => Hash::make($data['password_confirmation']),
             ]);
@@ -84,13 +85,14 @@ class User extends Authenticatable implements JWTSubject
         $dataInsert = [
             'id_tipo_identificacion' => $data['id_tipo_identificacion'],
             'id_usuario' => auth()->user()->id,
-            'name' => strtoupper($data['name']),
-            'last_name' => strtoupper($data['last_name']),
+            'name' => mb_strtoupper($data['name']),
+            'last_name' => mb_strtoupper($data['last_name']),
             'identification' => $data['identification'],
             'movil' => $data['movil'],
             'telephone' => $data['telephone'],
-            'direction' => strtoupper($data['direction']),
-            'email' => strtoupper($data['email']),
+            'direction' => mb_strtoupper($data['direction']),
+            'email' => mb_strtoupper($data['email']),
+            'rol' => mb_strtolower($data['rol']),
             'password' => Hash::make($data['password']),
             'password_confirmation' => Hash::make($data['password_confirmation']),
         ];
